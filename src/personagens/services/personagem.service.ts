@@ -52,7 +52,7 @@ class personagemService {
     
             return "Personagem removido com sucesso";
         } catch (error) {
-            throw new Error(`Ocorreu um erro ao remover o personagems: s${error}`);
+            throw new Error(`Ocorreu um erro ao remover o personagem: ${error}`);
         }
     }
 }
