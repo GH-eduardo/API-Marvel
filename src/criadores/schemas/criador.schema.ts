@@ -8,4 +8,4 @@ const criadorSchema = new Schema({
 
 });
 
-export default model("Category", criadorSchema)
+export default model("Criador", criadorSchema)

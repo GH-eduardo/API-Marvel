@@ -20,7 +20,7 @@ class App {
 
     public async database() {
         try {
-            await mongoose.connect('mongodb://127.0.0.1:27017/tarefas-api');
+            await mongoose.connect('mongodb://127.0.0.1:27017/API-Marvel');
             console.log('Conectado com a base de dados')
         } catch (error) {
             console.error("Erro ao conectar com a base de dados:", error)
@@ -29,8 +29,8 @@ class App {
 
     public routes() {
         this.express.use(quadrinhos)
-        this.express.use(criadores)
         this.express.use(personagens)
+        this.express.use(criadores)
     }
 }
 export default new App().express
