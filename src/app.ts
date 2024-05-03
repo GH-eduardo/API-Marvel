@@ -28,9 +28,9 @@ class App {
     }
 
     public routes() {
-        this.express.use(quadrinhos)
-        this.express.use(personagens)
         this.express.use(criadores)
+        this.express.use(personagens)
+        this.express.use(quadrinhos)
     }
 }
 export default new App().express
