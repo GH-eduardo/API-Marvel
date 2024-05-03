@@ -1,61 +1,61 @@
 import personagemModel from '../schemas/personagem.schema'
-import taskModel from '../../tasks/schemas/task.schema'
-import categoryModel from '../../personagens/schemas/personagem.schema'
-import { userType } from '../types/personagem.type'
+import quadrinhoModel from '../../quadrinhos/schemas/quadrinho.schema'
+import criadorModel from '../../criadores/schemas/criador.schema'
+import { personagemType } from '../types/personagem.type'
 
-class userService {
+class personagemService {
 
-    async create(personagem: userType) {
-        const createdUser = await personagemModel.create(personagem)
-        return createdUser
+    async create(personagem: personagemType) {
+        const createdPersonagem = await personagemModel.create(personagem)
+        return createdPersonagem
     }
 
     async findAll() {
-        const findedUsers = await personagemModel.find()
-        return findedUsers
+        const findedPersonagens = await personagemModel.find()
+        return findedPersonagens
     }
 
     async findById(id: string) {
-        const findedUser = await personagemModel.findById(id)
-        return findedUser
+        const findedPersonagem = await personagemModel.findById(id)
+        return findedPersonagem
     }
 
-    async update(id: string, personagem: userType) {
-        const updatedUser = await personagemModel.findByIdAndUpdate(id, {
+    async update(id: string, personagem: personagemType) {
+        const updatedPersonagem = await personagemModel.findByIdAndUpdate(id, {
             name: personagem.name,
             weight: personagem.weight,
             email: personagem.email,
             password: personagem.password,
-            tasks: personagem.tasks
+            quadrinhos: personagem.quadrinhos
         }, { new: true })
 
-        return updatedUser
+        return updatedPersonagem
     }
 
     async delete(id: string) {
         try {
             const personagem = await personagemModel.findById(id);
             if (!personagem) {
-                throw new Error('Usuário não encontrado');
+                throw new Error('Personagem não encontrado');
             }
 
-            for (let taskId of personagem.tasks) {
+            for (let quadrinhoId of personagem.quadrinhos) {
 
-                const task = await taskModel.findById(taskId);
-                if (task && task.personagem) {
-                    await categoryModel.findByIdAndUpdate(task.personagem, { $pull: { tasks: taskId } });
+                const quadrinho = await quadrinhoModel.findById(quadrinhoId);
+                if (quadrinho && quadrinho.criador) {
+                    await criadorModel.findByIdAndUpdate(quadrinho.criador, { $pull: { quadrinhos: quadrinhoId } });
                 }
-                await taskModel.findByIdAndDelete(taskId);
+                await quadrinhoModel.findByIdAndDelete(quadrinhoId);
             }
 
             await personagemModel.findByIdAndDelete(id);
     
-            return "Usuário removido com sucesso";
+            return "Personagem removido com sucesso";
         } catch (error) {
-            throw new Error(`Ocorreu um erro ao remover o usuário: ${error}`);
+            throw new Error(`Ocorreu um erro ao remover o personagems: s${error}`);
         }
     }
 }
 
 
-export default new userService()
+export default new personagemService()

@@ -1,11 +1,11 @@
 import { Schema, model } from 'mongoose'
 
-const categorySchema = new Schema({
+const criadorSchema = new Schema({
     name: { type: String, required: true, unique: true},
     color: {type: String, enum: ['verde','vermelho','amarelo','azul','roxo'], required: true},
-    tasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }]
+    quadrinhos: [{ type: Schema.Types.ObjectId, ref: 'Quadrinho' }]
 }, {
 
 });
 
-export default model("Category", categorySchema)
+export default model("Category", criadorSchema)

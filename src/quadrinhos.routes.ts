@@ -1,25 +1,25 @@
 import { Router } from 'express'
-import taskController from './tasks/controllers/task.controller'
+import quadrinhoController from './quadrinhos/controllers/quadrinho.controller'
 
-const tasks = Router()
-tasks.post('/tasks', taskController.create)
-tasks.get('/tasks', taskController.findAll)
-tasks.get('/tasks/completed', taskController.getCompletedTasks)
-tasks.get('/tasks/pending', taskController.getPendingTasks)
-tasks.get('/tasks/due-in-period', taskController.findTasksDueInPeriod)
-tasks.get('/tasks/average-completion', taskController.calculateAverageCompletion)
-tasks.get('/tasks/longest-description', taskController.findTaskWithLongestDescription)
-tasks.get('/tasks/group-by-category', taskController.groupByCategory)
-tasks.get('/tasks/:id', taskController.findById)
-tasks.get('/tasks/user/:id', taskController.findAllByUserId)
-tasks.get('/tasks/user/:id/count', taskController.countTasksByUserId)
-tasks.get('/tasks/user/:id/most-recent', taskController.findMostRecentTaskByUserId)
-tasks.get('/tasks/user/:id/oldest', taskController.findOldestTaskByUserId)
-tasks.get('/tasks/category/:id', taskController.filterByCategory)
-tasks.put('/tasks/:id', taskController.update)
-tasks.delete('/tasks/:id', taskController.delete)
+const quadrinhos = Router()
+quadrinhos.post('/quadrinhos', quadrinhoController.create)
+quadrinhos.get('/quadrinhos', quadrinhoController.findAll)
+quadrinhos.get('/quadrinhos/completed', quadrinhoController.getCompletedQuadrinhos)
+quadrinhos.get('/quadrinhos/pending', quadrinhoController.getPendingQuadrinhos)
+quadrinhos.get('/quadrinhos/due-in-period', quadrinhoController.findQuadrinhosDueInPeriod)
+quadrinhos.get('/quadrinhos/average-completion', quadrinhoController.calculateAverageCompletion)
+quadrinhos.get('/quadrinhos/longest-description', quadrinhoController.findQuadrinhoWithLongestDescription)
+quadrinhos.get('/quadrinhos/group-by-category', quadrinhoController.groupByCriador)
+quadrinhos.get('/quadrinhos/:id', quadrinhoController.findById)
+quadrinhos.get('/quadrinhos/user/:id', quadrinhoController.findAllByPersonagemId)
+quadrinhos.get('/quadrinhos/user/:id/count', quadrinhoController.countQuadrinhosByPersonagemId)
+quadrinhos.get('/quadrinhos/user/:id/most-recent', quadrinhoController.findMostRecentQuadrinhoByPersonagemId)
+quadrinhos.get('/quadrinhos/user/:id/oldest', quadrinhoController.findOldestQuadrinhoByPersonagemId)
+quadrinhos.get('/quadrinhos/category/:id', quadrinhoController.filterByCriador)
+quadrinhos.put('/quadrinhos/:id', quadrinhoController.update)
+quadrinhos.delete('/quadrinhos/:id', quadrinhoController.delete)
 
 
 export {
-    tasks
+    quadrinhos
 }

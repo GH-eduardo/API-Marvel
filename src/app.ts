@@ -1,8 +1,8 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import { tasks} from './tasks.routes'
-import { categories} from "./categories.routes";
-import { users} from "./users.routes";
+import { quadrinhos} from './quadrinhos.routes'
+import { criadores} from "./criadores.routes";
+import { personagens} from "./personagens.routes";
 
 class App {
     public express: express.Application
@@ -28,9 +28,9 @@ class App {
     }
 
     public routes() {
-        this.express.use(tasks)
-        this.express.use(categories)
-        this.express.use(users)
+        this.express.use(quadrinhos)
+        this.express.use(criadores)
+        this.express.use(personagens)
     }
 }
 export default new App().express

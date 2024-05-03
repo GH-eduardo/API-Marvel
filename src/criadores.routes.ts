@@ -1,15 +1,15 @@
 import { Router } from 'express'
-import categoryController from './categories/controllers/category.controller'
+import criadorController from './criadores/controllers/criador.controller'
 
-const categories = Router()
-categories.post('/categories', categoryController.create)
-categories.get('/categories', categoryController.findAll)
-categories.get('/categories/:id', categoryController.findById)
-categories.get('/categories/user/:id', categoryController.findAllByUserId)
-categories.put('/categories/:id', categoryController.update)
-categories.delete('/categories/:id', categoryController.delete)
+const criadores = Router()
+criadores.post('/criadores', criadorController.create)
+criadores.get('/criadores', criadorController.findAll)
+criadores.get('/criadores/:id', criadorController.findById)
+criadores.get('/criadores/user/:id', criadorController.findAllByPersonagemId)
+criadores.put('/criadores/:id', criadorController.update)
+criadores.delete('/criadores/:id', criadorController.delete)
 
 
 export {
-    categories
+    criadores
 }
