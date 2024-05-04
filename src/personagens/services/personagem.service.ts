@@ -22,10 +22,10 @@ class personagemService {
 
     async update(id: string, personagem: personagemType) {
         const updatedPersonagem = await personagemModel.findByIdAndUpdate(id, {
-            idPersonagem: personagem.idPersonagem,
+            id: personagem.id,
             name: personagem.name,
             description: personagem.description,
-            resourseURL: personagem.resourseURL,
+            resourceURL: personagem.resourceURL,
             quadrinhos: personagem.quadrinhos,
             series: personagem.series
         }, { new: true })

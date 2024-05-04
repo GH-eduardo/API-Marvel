@@ -1,5 +1,5 @@
 import app from './app'
-import { criarHash } from './requisicao'
+import { criarHash, getSeries } from './requisicoes-marvel'
 
 function main() {
     app.listen(3000, 'localhost', () => {
@@ -8,4 +8,5 @@ function main() {
 }
 
 main()
+getSeries()
 // criarHash()

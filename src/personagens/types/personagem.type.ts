@@ -1,16 +1,14 @@
 import { Schema } from "mongoose"
 
 export interface personagemType {
-    idPersonagem: { type: Number },
+    id: { type: Number },
     name: { type: String, required: true, unique: true },
     description: { type: String },
-    resourseURL: { type: String },
+    resourceURL: { type: String },
     quadrinhos: [{
-        idQuadrinho: { type: Number },
         titulo: { type: String, required: true },
     }]
     series: [{
-        idSerie: { type: Number },
         titulo: { type: String, required: true },
     }]
 }
