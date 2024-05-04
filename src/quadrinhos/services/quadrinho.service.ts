@@ -7,16 +7,6 @@ class quadrinhoService {
 
     async create(quadrinho: quadrinhoType) {
         const createdQuadrinho = await quadrinhoModel.create(quadrinho)
-        const updatedPersonagem = await personagemModel.findByIdAndUpdate(
-            quadrinho.author,
-            { $push: { quadrinhos: createdQuadrinho._id } },
-            { new: true }
-        );
-        const updatedCriador = await criadorModel.findByIdAndUpdate(
-            quadrinho.criador,
-            { $push: { quadrinhos: createdQuadrinho._id } },
-            { new: true }
-        );
         return createdQuadrinho
     }
 
@@ -39,30 +29,12 @@ class quadrinhoService {
         return quadrinhos;
     }
 
-    async getCompletedQuadrinhos() {
-        return quadrinhoModel.find({ status: 'concluída' });
-    }
-
-    async getPendingQuadrinhos() {
-        return quadrinhoModel.find({ status: 'pendente' });
-    }
-
     async countQuadrinhosByPersonagemId(personagemId: string) {
         const personagem = await personagemModel.findById(personagemId);
         if (!personagem) {
             throw new Error('Usuário não encontrado');
         }
         return personagem.quadrinhos.length;
-    }
-
-    async findMostRecentQuadrinhoByPersonagemId(personagemId: string) {
-        const quadrinho = await quadrinhoModel.findOne({ author: personagemId }).sort({ creation_date: -1 });
-        return quadrinho;
-    }
-
-    async findOldestQuadrinhoByPersonagemId(personagemId: string) {
-        const quadrinho = await quadrinhoModel.findOne({ author: personagemId }).sort({ creation_date: 1 });
-        return quadrinho;
     }
 
     async findQuadrinhosDueInPeriod(startDate: Date, endDate: Date) {
@@ -73,23 +45,6 @@ class quadrinhoService {
             }
         });
         return quadrinhos;
-    }
-
-    async calculateAverageCompletion() {
-        const quadrinhos = await quadrinhoModel.find();
-        const completedQuadrinhos = quadrinhos.filter(quadrinho => quadrinho.status === 'concluída');
-        return ("A média geral de conclusão de tarefas é de: " + (completedQuadrinhos.length / quadrinhos.length).toFixed(2));
-    }
-
-    async findQuadrinhoWithLongestDescription() {
-        const quadrinhos = await quadrinhoModel.find();
-        let longestDescriptionQuadrinho = quadrinhos[0];
-        for (let i = 1; i < quadrinhos.length; i++) {
-            if (quadrinhos[i].description.length > longestDescriptionQuadrinho.description.length) {
-                longestDescriptionQuadrinho = quadrinhos[i];
-            }
-        }
-        return longestDescriptionQuadrinho;
     }
 
     async groupByCriador() {
@@ -115,14 +70,13 @@ class quadrinhoService {
 
     async update(id: string, quadrinho: quadrinhoType) {
         const updatedQuadrinho = await quadrinhoModel.findByIdAndUpdate(id, {
+            idQuadrinho: quadrinho.idQuadrinho,
             title: quadrinho.title,
             description: quadrinho.description,
-            creation_date: quadrinho.creation_date,
-            conclusion_date: quadrinho.conclusion_date,
-            type: quadrinho.type,
-            criador: quadrinho.criador,
-            status: quadrinho.status,
-            author: quadrinho.author
+            publication_date_date: quadrinho.publication_date,
+            cover: quadrinho.cover,
+            criadores: quadrinho.criadores,
+            quantidadeDePaginas: quadrinho.quantidadeDePaginas
         }, { new: true })
 
         return updatedQuadrinho
@@ -134,8 +88,8 @@ class quadrinhoService {
             if (!quadrinho) {
                 throw new Error('Quadrinho não encontrado');
             }
-            await personagemModel.findOneAndUpdate({ _id: quadrinho.author }, { $pull: { quadrinhos: id } });
-            await criadorModel.findOneAndUpdate({ _id: quadrinho.criador }, { $pull: { quadrinhos: id } });
+            await personagemModel.findOneAndUpdate({ _id: quadrinho.criadores }, { $pull: { quadrinhos: id } });
+            await criadorModel.findOneAndUpdate({ _id: quadrinho.criadores }, { $pull: { quadrinhos: id } });
 
             await quadrinhoModel.findByIdAndDelete(id);
 

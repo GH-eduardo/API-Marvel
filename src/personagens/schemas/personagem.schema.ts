@@ -1,12 +1,18 @@
 import { Schema, model } from 'mongoose'
 
 const personagemSchema = new Schema({
-    name: { type: String, required: true},
-    weight: { type: Number},
-    email: { type: String, required: true},
-    password: { type: String, required: true},
-    quadrinhos: [{ type: Schema.Types.ObjectId, ref: 'Quadrinho' }]
-
+    idPersonagem: { type: Number },
+    name: { type: String, required: true, unique: true },
+    description: { type: String },
+    resourseURL: { type: String },
+    quadrinhos: [{
+        idQuadrinho: { type: Number },
+        titulo: { type: String, required: true },
+    }],
+    series: [{
+        idSerie: { type: Number },
+        titulo: { type: String, required: true },
+    }]
 }, {
 
 });

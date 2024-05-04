@@ -1,4 +1,5 @@
 import app from './app'
+import { criarHash } from './requisicao'
 
 function main() {
     app.listen(3000, 'localhost', () => {
@@ -7,3 +8,4 @@ function main() {
 }
 
 main()
+// criarHash()

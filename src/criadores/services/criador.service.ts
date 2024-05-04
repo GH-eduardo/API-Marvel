@@ -43,8 +43,10 @@ class criadorService {
 
     async update(id: string, criador: criadorType) {
         const updatedCriador = await criadorModel.findByIdAndUpdate(id, {
+            idCriador: criador.idCriador,
             name: criador.name,
-            color: criador.color
+            role: criador.role,
+            quadrinhos: criador.quadrinhos,
         }, { new: true })
 
         return updatedCriador

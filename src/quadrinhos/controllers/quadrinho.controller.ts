@@ -30,32 +30,10 @@ class quadrinhoController {
         return res.json(quadrinhos);
     }
 
-    async getCompletedQuadrinhos(req: Request, res: Response) {
-        const quadrinhos = await quadrinhoService.getCompletedQuadrinhos();
-        res.json(quadrinhos);
-    }
-
-    async getPendingQuadrinhos(req: Request, res: Response) {
-        const quadrinhos = await quadrinhoService.getPendingQuadrinhos();
-        res.json(quadrinhos);
-    }
-
     async countQuadrinhosByPersonagemId(req: Request, res: Response) {
         const userId = req.params.id;
         const count = await quadrinhoService.countQuadrinhosByPersonagemId(userId);
         res.json(count);
-    }
-
-    async findMostRecentQuadrinhoByPersonagemId(req: Request, res: Response) {
-        const userId = req.params.id;
-        const quadrinho = await quadrinhoService.findMostRecentQuadrinhoByPersonagemId(userId);
-        res.json(quadrinho);
-    }
-
-    async findOldestQuadrinhoByPersonagemId(req: Request, res: Response) {
-        const userId = req.params.id;
-        const quadrinho = await quadrinhoService.findOldestQuadrinhoByPersonagemId(userId);
-        res.json(quadrinho);
     }
 
     async findQuadrinhosDueInPeriod(req: Request, res: Response) {
@@ -68,18 +46,6 @@ class quadrinhoController {
         } else {
             console.log("Invalid date format, expected: yyyy-mm-dd")
         }
-    }
-
-    async calculateAverageCompletion(req: Request, res: Response) {
-        const averageCompletion = await quadrinhoService.calculateAverageCompletion()
-        res.status(200)
-        return res.json(averageCompletion)
-    }
-
-    async findQuadrinhoWithLongestDescription(req: Request, res: Response) {
-        const quadrinho = await quadrinhoService.findQuadrinhoWithLongestDescription()
-        res.status(200)
-        return res.json(quadrinho)
     }
 
     async groupByCriador(req: Request, res: Response) {

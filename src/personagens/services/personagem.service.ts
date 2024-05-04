@@ -22,11 +22,12 @@ class personagemService {
 
     async update(id: string, personagem: personagemType) {
         const updatedPersonagem = await personagemModel.findByIdAndUpdate(id, {
+            idPersonagem: personagem.idPersonagem,
             name: personagem.name,
-            weight: personagem.weight,
-            email: personagem.email,
-            password: personagem.password,
-            quadrinhos: personagem.quadrinhos
+            description: personagem.description,
+            resourseURL: personagem.resourseURL,
+            quadrinhos: personagem.quadrinhos,
+            series: personagem.series
         }, { new: true })
 
         return updatedPersonagem
@@ -42,8 +43,8 @@ class personagemService {
             for (let quadrinhoId of personagem.quadrinhos) {
 
                 const quadrinho = await quadrinhoModel.findById(quadrinhoId);
-                if (quadrinho && quadrinho.criador) {
-                    await criadorModel.findByIdAndUpdate(quadrinho.criador, { $pull: { quadrinhos: quadrinhoId } });
+                if (quadrinho && quadrinho.criadores) {
+                    await criadorModel.findByIdAndUpdate(quadrinho.criadores, { $pull: { quadrinhos: quadrinhoId } });
                 }
                 await quadrinhoModel.findByIdAndDelete(quadrinhoId);
             }

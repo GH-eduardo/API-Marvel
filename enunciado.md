@@ -9,11 +9,11 @@ Nesta atividade, você irá desenvolver uma API própria que servirá como um in
 As primeiras rotas de sua API serão para buscar os dados da API da Marvel e salvar em seu banco de dados. Suas outras rotas serão para consulta e manipulação em seu próprio banco de dados.
 Descrição da Atividade
 
-1. Registro na Marvel API: Obtenha sua chave de API registrando-se no Marvel Developer Portal. Esta chave permitirá que sua API faça requisições para buscar dados necessários.
+[x] 1. Registro na Marvel API: Obtenha sua chave de API registrando-se no Marvel Developer Portal. Esta chave permitirá que sua API faça requisições para buscar dados necessários.
 
-2. Escolha de uma Saga: Selecione uma saga do Universo Marvel para ser o foco da sua API. Esta escolha determinará os dados que você irá buscar e disponibilizar através da sua API.
+[x] 2. Escolha de uma Saga: Selecione uma saga do Universo Marvel para ser o foco da sua API. Esta escolha determinará os dados que você irá buscar e disponibilizar através da sua API.
 
-3. Modelagem das Entidades:
+[x] 3. Modelagem das Entidades:
 Personagens: Crie uma entidade Personagem para mapear os dados dos personagens que aparecem na saga escolhida. Inclua atributos como nome, descrição, e URL da imagem.
 
 Quadrinhos (Comics): Desenvolva uma entidade Comic que armazena informações sobre os quadrinhos que fazem parte da saga, como título, descrição, data de publicação, e capa.
