@@ -48,18 +48,23 @@ function criarHash() {
     // });
 }
 
+async function postPersonagens(filteredData: personagemType[]) {
+    for (let i = 0; i < filteredData.length; i++) {
+        try {
+            await axios.post('http://localhost:3000/personagens', filteredData[i]);
+        } catch (error: any) { 
+            if (error.code === 'ECONNRESET') {
+                console.log('ECONNRESET, tentando novamente');
+                await new Promise(resolve => setTimeout(resolve, 2000)); // espera 5 segundos
+                i--; // tenta a mesma requisição novamente
+            } else {
+                console.error(error);
+            }
+        }
+    }
+}
+
 async function getSeries() {
-    // const url = 'http://gateway.marvel.com/v1/public/series/926?ts=1&apikey=c432a751b03e7d971dbd25da9fa2c8b6&hash=2ac066b5665be17ab51f3df391d2a9ce';
-    // const response = await axios.get(url);
-    // const data = response.data;
-    // console.log('\nA série escolhida para a API foi: ' + data.data.results[0].title);
-    // console.log('\nDescrição: ' + data.data.results[0].description);
-    // console.log('\nPersonagens presentes: ')
-    // console.log(data.data.results[0].characters.items);
-    // console.log('\nQuadrinhos da série: ')
-    // console.log(data.data.results[0].comics.items);
-    // console.log('\nCréditos: ')
-    // console.log(data.data.results[0].creators.items);
 
     let url = 'http://gateway.marvel.com/v1/public/series/926/characters?ts=1&apikey=c432a751b03e7d971dbd25da9fa2c8b6&hash=2ac066b5665be17ab51f3df391d2a9ce';
     let response = await axios.get(url);
@@ -80,7 +85,7 @@ async function getSeries() {
         filteredData[index].resourceURL = data.results[index].resourceURI;
     }
 
-    for (let index = 0; index < data.results.length; index++) {
+    for (let index = 0; index < filteredData.length; index++) {
 
         url = 'http://gateway.marvel.com/v1/public/characters/' + filteredData[index].id + '/comics?limit=100&ts=1&apikey=c432a751b03e7d971dbd25da9fa2c8b6&hash=2ac066b5665be17ab51f3df391d2a9ce';
         response = await axios.get(url);
@@ -103,7 +108,7 @@ async function getSeries() {
         }
     }
 
-    for (let index = 0; index < data.results.length; index++) {
+    for (let index = 0; index < filteredData.length; index++) {
 
         url = 'http://gateway.marvel.com/v1/public/characters/' + filteredData[index].id + '/series?limit=100&ts=1&apikey=c432a751b03e7d971dbd25da9fa2c8b6&hash=2ac066b5665be17ab51f3df391d2a9ce';
         response = await axios.get(url);
@@ -125,9 +130,15 @@ async function getSeries() {
             }
         }
     }
+    
+    getPersonagens();
+    postPersonagens(filteredData);
 
-    console.log('bom dia!');
-    console.log('bom dia!');
+    getQuadrinhos();
+    postQuadrinhos(filteredData);
+
+    getCriadores();
+    postCriadores(filteredData);
 
     // url = 'http://gateway.marvel.com/v1/public/series/926/comics?limit=50ts=1&apikey=c432a751b03e7d971dbd25da9fa2c8b6&hash=2ac066b5665be17ab51f3df391d2a9ce';
     // response = await axios.get(url);
@@ -139,7 +150,6 @@ async function getSeries() {
     // data = response.data;
     // console.log(data.data.results);
 
-    // return data2;
 }
 
 export { getSeries };
