@@ -221,8 +221,8 @@ async function inicializarBanco() {
     let quadrinhosData: quadrinhoType[] = await getQuadrinhos();
     postQuadrinhos(quadrinhosData);
 
-    // let criadoresData: criadorType[] = await getCriadores();
-    // postCriadores(criadoresData);
+    let criadoresData: criadorType[] = await getCriadores();
+    postCriadores(criadoresData);
 }
 
 export { inicializarBanco };
