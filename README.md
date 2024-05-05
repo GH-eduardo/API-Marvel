@@ -6,6 +6,10 @@
 execute no terminal (estando no diretório principal do repositório): 
 
 ```
+npm install
+```
+e
+```
 npm run start
 ```
 
