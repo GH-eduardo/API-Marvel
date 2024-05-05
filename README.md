@@ -14,13 +14,13 @@ npm run start
 ```
 
 - Observe que os "id's" gerados automaticamente pelo MongoDB tem o formato do tipo: *662fb7ba3b32c9665dd04a29*,
+- Nas rotas em que houver *':id'* simplesmente **substitua por um id específico** na hora da utilização.
 - **Todas** as rotas devem começar com: 
 
 ```
 http://localhost:3000
 ```
 
-- Nas rotas em que houver *':id'* simplesmente **substitua por um id específico** na hora da utilização.
 ---
 ## Entidades:
 ## Personagens
