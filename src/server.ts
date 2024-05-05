@@ -8,5 +8,4 @@ function main() {
 }
 
 main()
-inicializarBanco()
-// criarHash()
+// inicializarBanco()
