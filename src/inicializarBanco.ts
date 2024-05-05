@@ -2,7 +2,6 @@ import axios from 'axios';
 import { personagemType } from './personagens/types/personagem.type';
 import { quadrinhoType } from './quadrinhos/types/quadrinho.type';
 import { criadorType } from './criadores/types/criador.type';
-import { personagens } from './personagens.routes';
 
 async function postPersonagens(filteredData: personagemType[]) {
     for (let i = 0; i < filteredData.length; i++) {
