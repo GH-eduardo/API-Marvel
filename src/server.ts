@@ -1,5 +1,5 @@
 import app from './app'
-import { criarHash, getSeries } from './requisicoes-marvel'
+import { inicializarBanco } from './inicializarBanco'
 
 function main() {
     app.listen(3000, 'localhost', () => {
@@ -8,5 +8,5 @@ function main() {
 }
 
 main()
-getSeries()
+inicializarBanco()
 // criarHash()

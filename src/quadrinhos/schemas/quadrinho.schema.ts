@@ -1,17 +1,18 @@
 import { Schema, model } from 'mongoose'
 
 const quadrinhoSchema = new Schema({
-    idQuadrinho: { type: Number },
+    id: { type: Number },
     title: { type: String, required: true },
     description: { type: String },
     publication_date: { type: Date },
     cover: { type: String },
-    criadores: [{
-        criadorId: { type: Number },
-        name: { type: String },
-        role: { type: String }
-    }],
     quantidadeDePaginas: { type: Number },
+    criadores: [{
+        name: { type: String },
+    }],
+    personagens: [{
+        name: { type: String },
+    }],
 }, {
 
 });

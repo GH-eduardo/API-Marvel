@@ -70,7 +70,7 @@ class quadrinhoService {
 
     async update(id: string, quadrinho: quadrinhoType) {
         const updatedQuadrinho = await quadrinhoModel.findByIdAndUpdate(id, {
-            idQuadrinho: quadrinho.idQuadrinho,
+            id: quadrinho.id,
             title: quadrinho.title,
             description: quadrinho.description,
             publication_date_date: quadrinho.publication_date,

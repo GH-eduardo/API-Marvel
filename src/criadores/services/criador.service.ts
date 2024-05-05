@@ -43,10 +43,9 @@ class criadorService {
 
     async update(id: string, criador: criadorType) {
         const updatedCriador = await criadorModel.findByIdAndUpdate(id, {
-            idCriador: criador.idCriador,
             name: criador.name,
             role: criador.role,
-            quadrinhos: criador.quadrinhos,
+            resourceURL: criador.resourceURL
         }, { new: true })
 
         return updatedCriador
@@ -57,10 +56,6 @@ class criadorService {
             const criador = await criadorModel.findById(id);
             if (!criador) {
                 throw new Error('Criador não encontrado');
-            }
-
-            for (let quadrinhoId of criador.quadrinhos) {
-                await quadrinhoModel.findByIdAndUpdate(quadrinhoId, { $unset: { criador: "" } });
             }
 
             await criadorModel.findByIdAndDelete(id);
