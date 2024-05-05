@@ -23,7 +23,7 @@ class quadrinhoController {
     async countQuadrinhos(req: Request, res: Response) {
         const userId = req.params.id;
         const count = await quadrinhoService.countQuadrinhos(userId);
-        res.json(count);
+        return res.json(count);
     }
 
     async findQuadrinhosReleasedInPeriod(req: Request, res: Response) {
