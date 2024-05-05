@@ -1,5 +1,7 @@
 # API *Intermediária* da Marvel feita em typescript com node.js, express e MongoDB
 
+- Para esse projeto escolhemos a coleção/serie 926: Marvel Adventures Fantastic Four (2005 - 2009)
+
 ## Observações
 
 - **Para inicializar:**
