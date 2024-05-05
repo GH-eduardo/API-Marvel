@@ -76,12 +76,12 @@ http://localhost:3000
 
 ## Personagem
 
-- **POST**
+ **POST**
 - Rota para criação de um novo personagem:
 ```
 /personagens
 ```
-- **GET**
+ **GET**
 - Rota para obter todos os personagens:
 ```
 /personagens
@@ -94,12 +94,12 @@ http://localhost:3000
 ```
 /personagens/:id/quadrinhos
 ```
-- **PUT**
+ **PUT**
 - Rota para atualizar um personagem existente:
 ```
 /personagens/:id
 ```
-- **DELETE**
+ **DELETE**
 - Rota para excluir um personagem: 
 ```
 /personagens/:id
@@ -107,19 +107,19 @@ http://localhost:3000
 ---
 ## Quadrinhos
 
-- **POST**
+ **POST**
 - Rota para criação de um novo quadrinho:
 ```
 /quadrinhos
 ```
-- **GET**
+ **GET**
 - Rota para listar todos os quadrinhos da coleção:
 ```
 /quadrinhos
 ```
 - Rota para listar quadrinhos que foram lançados em um determinado período: 
 ```
-/quadrinhos/release-in-period
+/quadrinhos/release-in-period?startDate=2024-01-01&endDate=2024-12-31
 ```
 - Rota para obter detalhes de um quadrinho específico:
 ```
@@ -137,12 +137,12 @@ http://localhost:3000
 ```
 /quadrinhos/least-pages
 ```
-- **PUT**
+ **PUT**
 - Rota para atualizar um quadrinho existente:
 ```
 /quadrinhos/:id
 ```
-- **DELETE**
+ **DELETE**
 - Rota para excluir um quadrinho:
 ```
 /quadrinhos/:id
@@ -150,12 +150,12 @@ http://localhost:3000
 ---
 ## Criadores
 
-- **POST**
+ **POST**
 - Rota para criação de um novo criador:
 ```
 /criadores
 ```
-- **GET**
+ **GET**
 - Rota para listar todos os criadores:
 ```
 /criadores
@@ -164,12 +164,12 @@ http://localhost:3000
 ```
 /criadores/:id
 ```
-- **PUT**
+ **PUT**
 - Rota para atualizar um criador existente: 
 ```
 /criadores/:id
 ```
-- **DELETE**
+ **DELETE**
 - Rota para excluir um criador:
 ```
 /criadores/:id
