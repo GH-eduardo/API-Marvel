@@ -21,7 +21,7 @@ class quadrinhoService {
     }
 
     async countQuadrinhos(personagemId: string) {
-        return ('A quantidade de quadrinhos dessa série/coleção é: ' + quadrinhoModel.countDocuments())
+        return ('A quantidade de quadrinhos dessa série/coleção é: ' + quadrinhoModel.lenght())
     }
 
     async findQuadrinhosReleasedInPeriod(startDate: Date, endDate: Date) {
