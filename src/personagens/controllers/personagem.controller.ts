@@ -20,6 +20,11 @@ class personagemController {
         return res.json(findedPersonagem)
     }
 
+    async findQuadrinhosByPersonagemId(req: Request, res: Response) {
+        const quadrinhos = await personagemService.findQuadrinhosByPersonagemId(req.params.id);
+        return res.json(quadrinhos);
+    }
+
     async update(req: Request, res: Response) {
         const updatedPersonagem = await personagemService.update(req.params.id, req.body)
         res.status(200)

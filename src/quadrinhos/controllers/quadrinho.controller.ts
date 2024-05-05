@@ -20,37 +20,34 @@ class quadrinhoController {
         return res.json(findedQuadrinho)
     }
 
-    async findAllByPersonagemId(req: Request, res: Response) {
-        const quadrinhos = await quadrinhoService.findAllByPersonagemId(req.params.id);
-        res.json(quadrinhos);
-    }
-
-    async filterByCriador(req: Request, res: Response) {
-        const quadrinhos = await quadrinhoService.filterByCriador(req.params.id);
-        return res.json(quadrinhos);
-    }
-
-    async countQuadrinhosByPersonagemId(req: Request, res: Response) {
+    async countQuadrinhos(req: Request, res: Response) {
         const userId = req.params.id;
-        const count = await quadrinhoService.countQuadrinhosByPersonagemId(userId);
+        const count = await quadrinhoService.countQuadrinhos(userId);
         res.json(count);
     }
 
-    async findQuadrinhosDueInPeriod(req: Request, res: Response) {
+    async findQuadrinhosReleasedInPeriod(req: Request, res: Response) {
         const startDate = req.query.startDate;
         const endDate = req.query.endDate;
 
         if (typeof startDate === 'string' && typeof endDate === 'string') {
-            const quadrinhos = await quadrinhoService.findQuadrinhosDueInPeriod(new Date(startDate), new Date(endDate));
+            const quadrinhos = await quadrinhoService.findQuadrinhosReleasedInPeriod(new Date(startDate), new Date(endDate));
             return res.json(quadrinhos);
         } else {
             console.log("Invalid date format, expected: yyyy-mm-dd")
         }
     }
 
-    async groupByCriador(req: Request, res: Response) {
-        const groupedQuadrinhos = await quadrinhoService.groupByCriador();
-        res.json(groupedQuadrinhos);
+    async findWithMostPages(req: Request, res: Response) {
+        const quadrinho = await quadrinhoService.findWithMostPages();
+        res.status(200);
+        return res.json(quadrinho);
+    }
+
+    async findWithLeastPages(req: Request, res: Response) {
+        const quadrinho = await quadrinhoService.findWithLeastPages();
+        res.status(200);
+        return res.json(quadrinho);
     }
 
     async update(req: Request, res: Response) {

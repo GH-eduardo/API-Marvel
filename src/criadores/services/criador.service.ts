@@ -20,27 +20,6 @@ class criadorService {
         return findedCriador
     }
 
-    async findAllByPersonagemId(userId: string) {
-        const quadrinhos = await quadrinhoModel.find({ author: userId }).populate('criador');
-        const criadorCounts = quadrinhos.reduce((counts: any[], quadrinho: any) => {
-            if (quadrinho.criador) {
-                const existingCriador = counts.find((c: any) => c.name === quadrinho.criador.name);
-                if (existingCriador) {
-                    existingCriador.quantidade++;
-                } else {
-                    counts.push({
-                        name: quadrinho.criador.name,
-                        color: quadrinho.criador.color,
-                        quantidade: 1
-                    });
-                }
-            }
-            return counts;
-        }, []);
-    
-        return criadorCounts;
-    }
-
     async update(id: string, criador: criadorType) {
         const updatedCriador = await criadorModel.findByIdAndUpdate(id, {
             name: criador.name,

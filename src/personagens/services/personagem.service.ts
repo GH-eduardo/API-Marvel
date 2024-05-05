@@ -20,6 +20,14 @@ class personagemService {
         return findedPersonagem
     }
 
+    async findQuadrinhosByPersonagemId(personagemId: string) {
+        const personagem = await this.findById(personagemId);
+        if (!personagem) {
+            throw new Error('Personagem não encontrado');
+        }
+        return personagem.quadrinhos;
+    }
+
     async update(id: string, personagem: personagemType) {
         const updatedPersonagem = await personagemModel.findByIdAndUpdate(id, {
             id: personagem.id,
@@ -50,7 +58,7 @@ class personagemService {
             }
 
             await personagemModel.findByIdAndDelete(id);
-    
+
             return "Personagem removido com sucesso";
         } catch (error) {
             throw new Error(`Ocorreu um erro ao remover o personagem: ${error}`);

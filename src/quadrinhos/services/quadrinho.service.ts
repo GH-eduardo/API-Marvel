@@ -20,26 +20,13 @@ class quadrinhoService {
         return findedQuadrinho
     }
 
-    async findAllByPersonagemId(personagemId: string) {
-        return await quadrinhoModel.find({ author: personagemId });
+    async countQuadrinhos(personagemId: string) {
+        return ('A quantidade de quadrinhos dessa série/coleção é: ' + quadrinhoModel.countDocuments())
     }
 
-    async filterByCriador(criadorId: string) {
-        const quadrinhos = await quadrinhoModel.find({ criador: criadorId });
-        return quadrinhos;
-    }
-
-    async countQuadrinhosByPersonagemId(personagemId: string) {
-        const personagem = await personagemModel.findById(personagemId);
-        if (!personagem) {
-            throw new Error('Usuário não encontrado');
-        }
-        return personagem.quadrinhos.length;
-    }
-
-    async findQuadrinhosDueInPeriod(startDate: Date, endDate: Date) {
+    async findQuadrinhosReleasedInPeriod(startDate: Date, endDate: Date) {
         const quadrinhos = await quadrinhoModel.find({
-            creation_date: {
+            publication_date: {
                 $gte: startDate,
                 $lte: endDate
             }
@@ -47,25 +34,12 @@ class quadrinhoService {
         return quadrinhos;
     }
 
-    async groupByCriador() {
-        const quadrinhos = await quadrinhoModel.find().populate('criador');
-        const criadorCounts = quadrinhos.reduce((counts: any[], quadrinho: any) => {
-            if (quadrinho.criador) {
-                const existingCriador = counts.find((c: any) => c.name === quadrinho.criador.name);
-                if (existingCriador) {
-                    existingCriador.quantidade++;
-                } else {
-                    counts.push({
-                        name: quadrinho.criador.name,
-                        color: quadrinho.criador.color,
-                        quantidade: 1
-                    });
-                }
-            }
-            return counts;
-        }, []);
+    async findWithMostPages() {
+        return quadrinhoModel.find().sort({ quantidadeDePaginas: -1 }).limit(1);
+    }
 
-        return criadorCounts;
+    async findWithLeastPages() {
+        return quadrinhoModel.find().sort({ quantidadeDePaginas: 1 }).limit(1);
     }
 
     async update(id: string, quadrinho: quadrinhoType) {

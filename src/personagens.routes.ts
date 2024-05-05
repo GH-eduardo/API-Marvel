@@ -5,6 +5,7 @@ const personagens = Router()
 personagens.post('/personagens', personagemController.create)
 personagens.get('/personagens', personagemController.findAll)
 personagens.get('/personagens/:id', personagemController.findById)
+personagens.get('/personagens/:id/quadrinhos', personagemController.findQuadrinhosByPersonagemId)
 personagens.put('/personagens/:id', personagemController.update)
 personagens.delete('/personagens/:id', personagemController.delete)
 

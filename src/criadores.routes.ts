@@ -5,7 +5,6 @@ const criadores = Router()
 criadores.post('/criadores', criadorController.create)
 criadores.get('/criadores', criadorController.findAll)
 criadores.get('/criadores/:id', criadorController.findById)
-criadores.get('/criadores/user/:id', criadorController.findAllByPersonagemId)
 criadores.put('/criadores/:id', criadorController.update)
 criadores.delete('/criadores/:id', criadorController.delete)
 

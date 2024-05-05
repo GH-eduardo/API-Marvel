@@ -20,11 +20,6 @@ class criadorController {
         return res.json(findedCriador)
     }
 
-    async findAllByPersonagemId(req: Request, res: Response) {
-        const criadores = await criadorService.findAllByPersonagemId(req.params.id);
-        res.json(criadores);
-    }
-
     async update(req: Request, res: Response) {
         const updatedCriador = await criadorService.update(req.params.id, req.body)
         res.status(200)
