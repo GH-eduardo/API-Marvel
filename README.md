@@ -119,7 +119,7 @@ http://localhost:3000
 ```
 - Rota para listar quadrinhos que foram lançados em um determinado período: 
 ```
-/quadrinhos/release-in-period?startDate=2024-01-01&endDate=2024-12-31
+/quadrinhos/release-in-period?startDate=2009-01-01&endDate=2010-12-31
 ```
 - Rota para obter detalhes de um quadrinho específico:
 ```
