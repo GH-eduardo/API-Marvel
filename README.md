@@ -1,99 +1,172 @@
 # API *Intermediária* da Marvel feita em typescript com node.js, express e MongoDB
 
+## Observações
+
 - **Para inicializar:**
-execute no terminal (estando no diretório principal do repositório): `npm run start:dev`
+execute no terminal (estando no diretório principal do repositório): 
+
+```
+npm run start
+```
+
 - Observe que os "id's" gerados automaticamente pelo MongoDB tem o formato do tipo: *662fb7ba3b32c9665dd04a29*,
-os id's fornecidos abaixo são apenas para exemplo, você deve substituir por um id específico na hora da utilização.
+- **Todas** as rotas devem começar com: 
+
+```
+http://localhost:3000
+```
+
+- Nas rotas em que houver *':id'* simplesmente **substitua por um id específico** na hora da utilização.
 ---
 ## Entidades:
-### User
-- **Atributos:** _id, name, weight(peso), email, password
+## Personagens
+- **Atributos:** id, nome, descrição, URL da imagem, quadrinhos em que apareceu 
 - **Exemplo de corpo para ser utilizado em requisições HTTP do tipo POST e PUT:**
 ```
 {
-    "name": "Nome do Usuário",
-    "weight": 100,
-    "email": "email@email.com",
-    "password": "123456"
+    "id": 2,
+    "name": "super herói bonzão",
+    "description": "salva o mundo",
+    "resourseURL": "www.heroi.com",
+    "quadrinhos": [{
+        "titulo": "coleção#2"
+    }],
+    "series": [{
+        "titulo": "saga do surfista prateado"
+    }]
 }
 ```
 
-### Task
-- **Atributos:** _id, title, description, creation_date, conclusion_date, type, category, status(pendente/em andamento/concluída) e author
+## Quadrinhos
+- **Atributos:** id, titulo, descrição, data de publicação, capa, quantidade de páginas, criadores e personagens que aparecem no quadrinho
 - **Exemplo de corpo para ser utilizado em requisições HTTP do tipo POST e PUT:**
 ```
 {
-    "title": "Título da Tarefa",
-    "description": "descrição",
-    "category": "662fb7ba3b32c9665dd04a29",
-    "type": "profissional",
-    "status": "concluída",
-    "author": "662fdf6feeeb539f8addd40d"
+    "id": 8,
+    "title": "Título bem bacana",
+    "description": "seila",
+    "publication_date": "2001/01/29",
+    "cover": "www.imagem.com",
+    "quantidadeDePaginas": 115
+    "criadores": [{
+        "name": "bento",
+    }],
+    "personagens": [{
+        "name": "surfista prateado",
+    }],
 }
 ```
 
-### Category
-- **Atributos:** _id, name, color(vermelho/verde/azul/amarelo/roxo).
+## Criador
+- **Atributos:** nome, função e a url de uma foto
 - **Exemplo de corpo para ser utilizado em requisições HTTP do tipo POST e PUT:**
 ```
 {
-    "name": "Nome de uma categoria de tarefas",
-    "color": "verde"
+    "name": "Pablo picasso",
+    "role": "ilustrator",
+    "resourceURL": "www.fotoDoCara.com"
 }
 ```
 ---
 # Rotas:
 
-## User
+## Personagem
 
-### POST
-- Rota para criação de um novo usuário: `http://localhost:3000/users`
-### GET
-- Rota para obter todos os usuários: `http://localhost:3000/users`
-- Rota para obter detalhes de um usuário específica: `http://localhost:3000/users/660c3411b974fc26087be5b7`
-### PUT
-- Rota para atualizar um usuário existente: `http://localhost:3000/users/660c3411b974fc26087be5b7`
-### DELETE
-- Rota para excluir um usuário: `http://localhost:3000/users/660c3411b974fc26087be5b7`
+- **POST**
+- Rota para criação de um novo personagem:
+```
+/personagens
+```
+- **GET**
+- Rota para obter todos os personagens:
+```
+/personagens
+```
+- Rota para obter detalhes de um personagem específico:
+```
+/personagens/:id
+```
+- Rota para obter todos os quadrinhos em que há aparição de um personagem específico:
+```
+/personagens/:id/quadrinhos
+```
+- **PUT**
+- Rota para atualizar um personagem existente:
+```
+/personagens/:id
+```
+- **DELETE**
+- Rota para excluir um personagem: 
+```
+/personagens/:id
+```
 ---
-## Task
+## Quadrinhos
 
-### POST
-- Rota para criação de uma nova tarefa: `http://localhost:3000/tasks`
-### GET
-- Rota para listar todas as tarefas: `http://localhost:3000/tasks`
-- Rota para obter detalhes de uma tarefa específica: `http://localhost:3000/tasks/662fdfdaeeeb539f8addd417`
-- Rota para listar todas as tarefas de um usuário: `http://localhost:3000/tasks/user/662fba553b32c9665dd04a32`
-- Rota para filtrar tarefas por categoria: `http://localhost:3000/tasks/category/662fb7ba3b32c9665dd04a29`
-- Rota para listar tarefas concluídas: `http://localhost:3000/tasks/completed`
-- Rota para listar tarefas pendentes: `http://localhost:3000/tasks/pending`
-- Rota para listar tarefas que vencem em um determinado período: `http://localhost:3000/tasks/due-in-period?startDate=2024-01-01&endDate=2024-12-31`
-- Rota para contar o número total de tarefas de um usuário: `http://localhost:3000/tasks/user/662fdf6feeeb539f8addd40d/count`
-- Rota para encontrar a tarefa mais recente de um usuário: `http://localhost:3000/tasks/user/662fdf6feeeb539f8addd40d/most-recent`
-- Rota para calcular a média de conclusão das tarefas: `http://localhost:3000/tasks/average-completion`
-- Rota para encontrar a tarefa com a descrição mais longa: `http://localhost:3000/tasks/longest-description`
-- Rota para agrupar tarefas por categoria: `http://localhost:3000/tasks/group-by-category`
-- Rota para encontrar a tarefa mais antiga de um usuário: `http://localhost:3000/tasks/user/662fdf6feeeb539f8addd40d/oldest`
-### PUT
-- Rota para atualizar uma tarefa existente: `http://localhost:3000/tasks/662fdfb5eeeb539f8addd40f`
-### DELETE
-- Rota para excluir uma tarefa: `http://localhost:3000/tasks/662fcd4056cfc8879a362e95`
+- **POST**
+- Rota para criação de um novo quadrinho:
+```
+/quadrinhos
+```
+- **GET**
+- Rota para listar todos os quadrinhos da coleção:
+```
+/quadrinhos
+```
+- Rota para listar quadrinhos que foram lançados em um determinado período: 
+```
+/quadrinhos/release-in-period
+```
+- Rota para obter detalhes de um quadrinho específico:
+```
+/quadrinhos/:id
+```
+- Rota para contar todos os quadrinhos da coleção:
+```
+/quadrinhos/count
+```
+- Rota para encontrar o quadrinho que tem mais páginas:
+```
+/quadrinhos/most-pages
+```
+- Rota para encontrar o quadrinho que tem menos páginas:
+```
+/quadrinhos/least-pages
+```
+- **PUT**
+- Rota para atualizar um quadrinho existente:
+```
+/quadrinhos/:id
+```
+- **DELETE**
+- Rota para excluir um quadrinho:
+```
+/quadrinhos/:id
+```
 ---
-## Category
+## Criadores
 
-### POST
-- Rota para criação de uma nova categoria: `http://localhost:3000/categories`
-### GET  
-- Rota para listar todas as categorias: `http://localhost:3000/categories`
-- Rota para obter detalhes de uma categoria específica: `http://localhost:3000/categories/662fb7ba3b32c9665dd04a29`
-- Rota para listar todas as categorias de um usuário: `http://localhost:3000/categories/user/662fdf6feeeb539f8addd40d`
-### PUT
-- Rota para atualizar uma categoria existente: `http://localhost:3000/categories/662fb7ba3b32c9665dd04a29`
-### DELETE
-- Rota para excluir uma categoria: `http://localhost:3000/categories/662fb7e43b32c9665dd04a2b`
----
-## Demais Observações:
-- Uma task sempre vai estar associada a um (e somente um) usuário, portanto não é possível criar uma task antes de haver no mínimo um usuário, por sua vez cada usuário pode ter infinitas tasks
-- Uma task pode ou não estar associada a uma categoria, é opcional a task ter uma categoria
-- Só podem haver no máximo 5 categorias, das cores: vermelho/verde/azul/amarelo/roxo
-- Após deletar algo a base de dados é atualizada automaticamente, por exemplo: se um usuário for deletado todas as tasks dele serão deletadas também e assim por diante...
+- **POST**
+- Rota para criação de um novo criador:
+```
+/criadores
+```
+- **GET**
+- Rota para listar todos os criadores:
+```
+/criadores
+```
+- Rota para obter detalhes de um criador específico:
+```
+/criadores/:id
+```
+- **PUT**
+- Rota para atualizar um criador existente: 
+```
+/criadores/:id
+```
+- **DELETE**
+- Rota para excluir um criador:
+```
+/criadores/:id
+```
