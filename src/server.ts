@@ -8,4 +8,4 @@ function main() {
 }
 
 main()
-// inicializarBanco()
+inicializarBanco()

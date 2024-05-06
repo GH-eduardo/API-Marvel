@@ -222,6 +222,8 @@ async function inicializarBanco() {
 
     let criadoresData: criadorType[] = await getCriadores();
     postCriadores(criadoresData);
+
+    console.log('Dados importados!');
 }
 
 export { inicializarBanco };

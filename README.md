@@ -14,9 +14,12 @@ e
 ```
 npm run start
 ```
+- Depois de executar *npm run start*, se a função  *inicializarBanco* não estiver comentada no final do arquivo *server.ts* a base de dados será importada da API da marvel e o processo de fazer as requisições e filtrar os dados dura em média 3min e meio.
 
 - Observe que os "id's" gerados automaticamente pelo MongoDB tem o formato do tipo: *662fb7ba3b32c9665dd04a29*,
+
 - Nas rotas em que houver *':id'* simplesmente **substitua por um id específico** na hora da utilização.
+
 - **Todas** as rotas devem começar com: 
 
 ```
