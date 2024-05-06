@@ -10,7 +10,6 @@ async function postPersonagens(filteredData: personagemType[]) {
         } catch (error: any) { 
             if (error.code === 'ECONNRESET') {
                 console.log('ECONNRESET, tentando novamente');
-                await new Promise(resolve => setTimeout(resolve, 1000)); // espera 0.5 segundos
                 i--; // tenta a mesma requisição novamente
             } else {
                 console.error(error);
@@ -95,7 +94,6 @@ async function postQuadrinhos(filteredData: quadrinhoType[]) {
         } catch (error: any) { 
             if (error.code === 'ECONNRESET') {
                 console.log('ECONNRESET, tentando novamente');
-                await new Promise(resolve => setTimeout(resolve, 1000)); // espera 0.5 segundos
                 i--; // tenta a mesma requisição novamente
             } else {
                 console.error(error);
@@ -141,7 +139,7 @@ async function getQuadrinhos() {
         while (filteredData[index].criadores.length < data.total) {
             
             for (let i=0 ; i < data.results.length ; i++) {
-                filteredData[index].criadores.push({ creators: data.results[i].fullName });
+                filteredData[index].criadores.push({ name: data.results[i].fullName });
             }
             if (filteredData[index].criadores.length < data.total) {
                 aux += 100; offset = '&offset=';
@@ -163,7 +161,7 @@ async function getQuadrinhos() {
         while (filteredData[index].personagens.length < data.total) {
             
             for (let i=0 ; i < data.results.length ; i++) {
-                filteredData[index].personagens.push({ characters: data.results[i].name });
+                filteredData[index].personagens.push({ name: data.results[i].name });
             }
             if (filteredData[index].personagens.length < data.total) {
                 aux += 100; offset = '&offset=';
@@ -183,7 +181,6 @@ async function postCriadores(filteredData: criadorType[]) {
         } catch (error: any) { 
             if (error.code === 'ECONNRESET') {
                 console.log('ECONNRESET, tentando novamente');
-                await new Promise(resolve => setTimeout(resolve, 500)); // espera 0.5 segundos
                 i--; // tenta a mesma requisição novamente
             } else {
                 console.error(error);
